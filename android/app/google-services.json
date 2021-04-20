@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216366850254",
+    "project_id": "kucu-a6dd4",
+    "storage_bucket": "kucu-a6dd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216366850254:android:1d2d36b9b0e244f1bd309f",
+        "android_client_info": {
+          "package_name": "com.hamisiesq.kucu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216366850254-jg80riud3e523l1v08nank9k5brmv3tt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhHlcdec9lzqeD3OPOMxLV6Fu50kKS5YI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216366850254-jg80riud3e523l1v08nank9k5brmv3tt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
