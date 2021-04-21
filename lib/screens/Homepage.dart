@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kucu/screens/main_drawer.dart';
+import 'package:kucu/screens/settings.dart';
+import 'package:kucu/tabs/live_events.dart';
 
 class homePage extends StatefulWidget {
   @override
@@ -9,7 +11,12 @@ class homePage extends StatefulWidget {
 class _homePageState extends State<homePage> {
   int _currentindex = 0;
 
-  final tabs
+  final tabs = [
+    Center(child: Text("Home")),
+    Center(child: LiveEvents()),
+    Center(child: Text("My Account")),
+    Center(child: Text("Help")),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,14 +29,7 @@ class _homePageState extends State<homePage> {
         ),
       ),
       drawer: MainDrawer(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("KUCU Homepage")
-          ],
-        ),
-      ),
+      body: tabs[_currentindex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
         type: BottomNavigationBarType.fixed,
@@ -43,11 +43,11 @@ class _homePageState extends State<homePage> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.event,color: Colors.white),
-              title: Text("Live Events",style: TextStyle(color: Colors.white))
+              title: Text("Events",style: TextStyle(color: Colors.white))
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.youtube_searched_for_sharp,color: Colors.white),
-              title: Text("Youtube",style: TextStyle(color: Colors.white))
+              icon: Icon(Icons.person_pin,color: Colors.white),
+              title: Text("My account",style: TextStyle(color: Colors.white))
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.help,color: Colors.white),
