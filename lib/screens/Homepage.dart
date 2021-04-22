@@ -21,6 +21,7 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
             "Home Page",
           style: TextStyle(
@@ -43,7 +44,7 @@ class _homePageState extends State<homePage> {
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.event,color: Colors.white),
-              title: Text("Events",style: TextStyle(color: Colors.white))
+              title: Text("Dashboard",style: TextStyle(color: Colors.white))
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_pin,color: Colors.white),
