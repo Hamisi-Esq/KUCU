@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kucu/constants/const.dart';
 import 'package:kucu/tabs/searchbar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LiveEvents extends StatefulWidget {
   @override
@@ -108,7 +110,7 @@ class _LiveEventsState extends State<LiveEvents> {
                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                    crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
-                                   Text("Giving",
+                                   Text("Topic",
                                    style: Theme.of(context).textTheme.subtitle,
                                    ),
                                    Text(" Your Subject here")
@@ -119,6 +121,41 @@ class _LiveEventsState extends State<LiveEvents> {
                            ],
                            ),
                          ),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 20),
+                          padding: EdgeInsets.all(10),
+                          height: 90,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(13),
+                              boxShadow: [BoxShadow(offset: Offset(0,17),
+                                blurRadius: 23,
+                                spreadRadius: -13,
+                                color: Colors.black,
+
+                              )]
+                          ),
+                          child: Row(
+                            children: [
+                              Image(image: AssetImage("assets/KUCU LOGO.png")
+                              ),
+                              SizedBox(width: 20,),
+                              Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Topic",
+                                        style: Theme.of(context).textTheme.subtitle,
+                                      ),
+                                      Text(" Your Subject here")
+                                    ],)),
+                              Padding(padding: EdgeInsets.all(10),
+                                //child: Icon(Icon.add),
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -135,9 +172,26 @@ class SeassionCard extends StatelessWidget {
   final bool isDone;
   final Function press;
 
+  final Future<void> launched;
+  final String phoneNumber = "";
+  final String  _launchUrl = 'https://www.facebook.com/kucumaincampus/';
+
+  Future<void> _launchFacebook(String url) async{
+    if (await canLaunch( _launchUrl)){
+      await launch(_launchUrl,
+      forceSafariVC: true,
+          enableJavaScript: true,
+        forceWebView: true,
+          headers:<String, String>{'my_header_key' : 'my_header_value'}
+      );
+    }else{
+      throw 'Could not launch $_launchUrl';
+    }
+  }
+
   const SeassionCard({
     Key key, this.seassionNum,
-    this.isDone = false, this.press,
+    this.isDone = false, this.press, this.launched,
   }) : super(key: key);
 
   @override
@@ -161,7 +215,9 @@ class SeassionCard extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
                 child: InkWell(
-                  onTap: press,
+                  onTap: (){
+                    _launchFacebook(_launchUrl);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
@@ -170,17 +226,17 @@ class SeassionCard extends StatelessWidget {
                       height: 42,
                       width: 43,
                       decoration: BoxDecoration(
-                            color: isDone ? Kbluecolor : Colors.white,
+                            color: Colors.white,
                         shape: BoxShape.circle,
                         border: Border.all(color: Kbluecolor)
                       ),
-                      child: Icon(
-                            Icons.play_arrow,
-                        color:isDone ? Colors.white :Kbluecolor,
-                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SvgPicture.asset("assets/icons/facebook.svg",),
+                      )
                     ),
                     SizedBox(width: 10,),
-                    Text("Youtube",style: Theme.of(context).textTheme.subtitle,)
+                    Text("Facebook",style: Theme.of(context).textTheme.subtitle,)
                 ],
               ),
                   ),
@@ -199,9 +255,26 @@ class SeassionCard1 extends StatelessWidget {
   final bool isDone;
   final Function press;
 
+  final Future<void> launched;
+  final String phoneNumber = "";
+  final String  _launchUrl = 'https://kuchristianunion.org/';
+
+  Future<void> _launchOurWebsite(String url) async{
+    if (await canLaunch( _launchUrl)){
+      await launch(_launchUrl,
+          forceSafariVC: true,
+          enableJavaScript: true,
+          forceWebView: true,
+          headers:<String, String>{'my_header_key' : 'my_header_value'}
+      );
+    }else{
+      throw 'Could not launch $_launchUrl';
+    }
+  }
+
   const SeassionCard1({
     Key key, this.seassionNum,
-    this.isDone = false, this.press,
+    this.isDone = false, this.press, this.launched,
   }) : super(key: key);
 
   @override
@@ -225,7 +298,9 @@ class SeassionCard1 extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: press,
+                  onTap: (){
+                    _launchOurWebsite(_launchUrl);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
@@ -238,9 +313,9 @@ class SeassionCard1 extends StatelessWidget {
                               shape: BoxShape.circle,
                               border: Border.all(color: Kbluecolor)
                           ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color:isDone ? Colors.white :Kbluecolor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset("assets/icons/browser.svg",),
                           ),
                         ),
                         SizedBox(width: 10,),
@@ -262,9 +337,26 @@ class SeassionCard2 extends StatelessWidget {
   final bool isDone;
   final Function press;
 
+  final Future<void> launched;
+  final String  _launchUrl = 'https://www.youtube.com/channel/UCSdRsyPa_7SCP5zyJLwy3Cw';
+
+  Future<void> _launchYoutube(String url) async{
+    if (await canLaunch( _launchUrl)){
+      await launch(_launchUrl,
+          enableJavaScript: true,
+          forceSafariVC: true,
+          forceWebView: true,
+          headers:<String, String>{'my_header_key' : 'my_header_value'}
+      );
+    }else{
+      throw 'Could not launch $_launchUrl';
+    }
+  }
+
+
   const SeassionCard2({
     Key key, this.seassionNum,
-    this.isDone = false, this.press,
+    this.isDone = false, this.press, this.launched,
   }) : super(key: key);
 
   @override
@@ -288,7 +380,9 @@ class SeassionCard2 extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: press,
+                  onTap: (){
+                    _launchYoutube(_launchUrl);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
@@ -301,13 +395,13 @@ class SeassionCard2 extends StatelessWidget {
                               shape: BoxShape.circle,
                               border: Border.all(color: Kbluecolor)
                           ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color:isDone ? Colors.white :Kbluecolor,
-                          ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset("assets/icons/youtube.svg",),
+                            )
                         ),
                         SizedBox(width: 10,),
-                        Text("Facebook",style: Theme.of(context).textTheme.subtitle,)
+                        Text("Youtube",style: Theme.of(context).textTheme.subtitle,)
                       ],
                     ),
                   ),
@@ -325,9 +419,26 @@ class SeassionCard3 extends StatelessWidget {
   final bool isDone;
   final Function press;
 
+  final Future<void> launched;
+  final String phoneNumber = "";
+  final String  _launchUrl = 'https://kucublog.wordpress.com/';
+
+  Future<void> _launchKucuBlog(String url) async{
+    if (await canLaunch( _launchUrl)){
+      await launch(_launchUrl,
+          forceSafariVC: true,
+          enableJavaScript: true,
+          forceWebView: true,
+          headers:<String, String>{'my_header_key' : 'my_header_value'}
+      );
+    }else{
+      throw 'Could not launch $_launchUrl';
+    }
+  }
+
   const SeassionCard3({
     Key key, this.seassionNum,
-    this.isDone = false, this.press,
+    this.isDone = false, this.press, this.launched,
   }) : super(key: key);
 
   @override
@@ -351,7 +462,9 @@ class SeassionCard3 extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: press,
+                  onTap: (){
+                    _launchKucuBlog(_launchUrl);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
@@ -364,13 +477,13 @@ class SeassionCard3 extends StatelessWidget {
                               shape: BoxShape.circle,
                               border: Border.all(color: Kbluecolor)
                           ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color:isDone ? Colors.white :Kbluecolor,
-                          ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SvgPicture.asset("assets/icons/wordpress.svg",),
+                            )
                         ),
                         SizedBox(width: 10,),
-                        Text("Twitter",style: Theme.of(context).textTheme.subtitle,)
+                        Text("KUCU\nBlog",style: Theme.of(context).textTheme.subtitle,)
                       ],
                     ),
                   ),
@@ -427,13 +540,13 @@ class SeassionCard4 extends StatelessWidget {
                               shape: BoxShape.circle,
                               border: Border.all(color: Kbluecolor)
                           ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color:isDone ? Colors.white :Kbluecolor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset("assets/icons/twitter.svg",),
                           ),
                         ),
                         SizedBox(width: 10,),
-                        Text("KUCU \nBlog ",style: Theme.of(context).textTheme.subtitle,)
+                        Text("Twitter",style: Theme.of(context).textTheme.subtitle,)
                       ],
                     ),
                   ),
@@ -489,10 +602,10 @@ class SeassionCard5 extends StatelessWidget {
                               shape: BoxShape.circle,
                               border: Border.all(color: Kbluecolor)
                           ),
-                          child: Icon(
-                            Icons.play_arrow,
-                            color:isDone ? Colors.white :Kbluecolor,
-                          ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SvgPicture.asset("assets/icons/instagram.svg",),
+                            )
                         ),
                         SizedBox(width: 10,),
                         Text("Instagram",style: Theme.of(context).textTheme.subtitle,)

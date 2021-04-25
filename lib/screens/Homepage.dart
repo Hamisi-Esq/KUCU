@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kucu/screens/home.dart';
 import 'package:kucu/screens/main_drawer.dart';
 import 'package:kucu/screens/settings.dart';
 import 'package:kucu/tabs/live_events.dart';
@@ -12,7 +13,7 @@ class _homePageState extends State<homePage> {
   int _currentindex = 0;
 
   final tabs = [
-    Center(child: Text("Home")),
+    Center(child: Home()),
     Center(child: LiveEvents()),
     Center(child: Text("My Account")),
     Center(child: Text("Help")),
@@ -39,22 +40,24 @@ class _homePageState extends State<homePage> {
         selectedFontSize: 13,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home,color: Colors.white,),
-            title: Text("Home",style: TextStyle(color: Colors.white)),
+            icon: Icon(Icons.home,),
+            title: Text("Home"),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.event,color: Colors.white),
-              title: Text("Dashboard",style: TextStyle(color: Colors.white))
+              icon: Icon(Icons.event),
+              title: Text("Dashboard",)
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_pin,color: Colors.white),
-              title: Text("My account",style: TextStyle(color: Colors.white))
+              icon: Icon(Icons.person_pin),
+              title: Text("My account")
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.help,color: Colors.white),
-              title: Text("Help",style: TextStyle(color: Colors.white),)
+              icon: Icon(Icons.help,),
+              title: Text("Help",)
           ),
         ],
+        selectedItemColor: Colors.red,
+        unselectedItemColor: Colors.white,
         onTap: (index){
           setState(() {
             _currentindex= index;
