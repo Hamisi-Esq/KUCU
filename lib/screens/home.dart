@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:kucu/constants/const.dart';
 import 'package:kucu/models/annual_activities.dart';
 import 'package:kucu/style/styling.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -328,16 +329,36 @@ class CategoryCard extends StatelessWidget {
     Key key,
     @required this.icon,
     @required this.text,
-    @required this.press,
+    @required this.launched,
   }) : super(key: key);
 
   final String icon, text;
-  final GestureTapCallback press;
+  //final GestureTapCallback press;
+
+  final Future<void> launched;
+  final String phoneNumber = "";
+  final String  _launchUrl = 'https://kuchristianunion.org/register.html';
+
+  Future<void> _launchRegisterPlatform(String url) async{
+    if (await canLaunch( _launchUrl)){
+      await launch(_launchUrl,
+          forceSafariVC: true,
+          enableJavaScript: true,
+          forceWebView: true,
+          headers:<String, String>{'my_header_key' : 'my_header_value'}
+      );
+    }else{
+      throw 'Could not launch $_launchUrl';
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: press,
+      onTap: (){
+        _launchRegisterPlatform(_launchUrl);
+      },
           child: SizedBox(
         width: 55,
         child: Column(

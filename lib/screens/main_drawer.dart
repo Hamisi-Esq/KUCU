@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kucu/screens/Homepage.dart';
+import 'package:kucu/screens/home.dart';
+import 'package:kucu/screens/profile.dart';
 import 'package:kucu/screens/settings.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -41,7 +44,10 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-            onTap: null,
+            onTap: (){
+              Navigator.of(context).pop();
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>Profile()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.home,color: Colors.indigo),
@@ -51,7 +57,10 @@ class MainDrawer extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-            onTap: null,
+            onTap: (){
+              Navigator.of(context).pop();
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>homePage()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.settings,color: Colors.indigo),
