@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kucu/constants/const.dart';
+import 'package:kucu/constants/loading.dart';
 import 'package:kucu/tabs/searchbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -171,6 +172,7 @@ class SeassionCard extends StatelessWidget {
   final int seassionNum;
   final bool isDone;
   final Function press;
+  final bool loading;
 
   final Future<void> launched;
   final String phoneNumber = "";
@@ -191,12 +193,12 @@ class SeassionCard extends StatelessWidget {
 
   const SeassionCard({
     Key key, this.seassionNum,
-    this.isDone = false, this.press, this.launched,
+    this.isDone = false, this.press, this.launched, this.loading,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
+    return loading ? Loading(): LayoutBuilder(
       builder: (context, Constraint) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(13),
