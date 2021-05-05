@@ -315,7 +315,12 @@ class Categories extends StatelessWidget {
         children: [
           ...List.generate(categories.length, (index) => CategoryCard(icon: categories[index]["icon"],
           text: categories[index]["text"],
-          press: (){},
+          press: (){
+
+          },
+            if (categories[0]["Register"]){
+      _launchRegisterPlatform(_launchUrl);
+      }
           ),
           ),
         ]
@@ -330,10 +335,11 @@ class CategoryCard extends StatelessWidget {
     @required this.icon,
     @required this.text,
     @required this.launched,
+    @required this.press,
   }) : super(key: key);
 
   final String icon, text;
-  //final GestureTapCallback press;
+  final GestureTapCallback press;
 
   final Future<void> launched;
   final String phoneNumber = "";
@@ -357,7 +363,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        _launchRegisterPlatform(_launchUrl);
+
       },
           child: SizedBox(
         width: 55,
